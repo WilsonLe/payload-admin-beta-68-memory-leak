@@ -1,42 +1,178 @@
-# Payload Blank Template
+# Testing different versions of payload beta
 
-A blank template for [Payload](https://github.com/payloadcms/payload) to help you get up and running quickly. This repo may have been created by running `npx create-payload-app@latest` and selecting the "blank" template or by cloning this template on [Payload Cloud](https://payloadcms.com/new/clone/blank).
+- beta 68: `pnpm payload migrate:create` works great.
+- beta 69: `pnpm payload migrate:create` fails. This error is fixed in beta 70.
+- beta 70: `pnpm payload migrate:create` works great.
+- beta 71: `pnpm payload migrate:create` works great.
+- beta 72: `pnpm payload migrate:create` fails with the following error:
 
-See the official [Examples Directory](https://github.com/payloadcms/payload/tree/main/examples) for details on how to use Payload in a variety of different ways.
+```sh
+file:///~/Code/payload-reproduce/node_modules/.pnpm/payload@3.0.0-beta.72_@swc+core@1.7.5_@swc+helpers@0.5.11__@swc+types@0.1.12_graphql@16.8.1_typescript@5.5.4/node_modules/payload/dist/bin/migrate.js:75
+                throw new Error(`Error creating migration: ${err.message}`);
+                      ^
 
-## Development
+Error: Error creating migration: [
+  {
+    "received": "5",
+    "code": "invalid_literal",
+    "expected": "7",
+    "path": [
+      "version"
+    ],
+    "message": "Invalid literal value, expected \"7\""
+  },
+  {
+    "received": "pg",
+    "code": "invalid_literal",
+    "expected": "postgresql",
+    "path": [
+      "dialect"
+    ],
+    "message": "Invalid literal value, expected \"postgresql\""
+  },
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "received": "string",
+    "path": [
+      "tables",
+      "users",
+      "indexes",
+      "users_created_at_idx",
+      "columns",
+      0
+    ],
+    "message": "Expected object, received string"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "received": "string",
+    "path": [
+      "tables",
+      "users",
+      "indexes",
+      "users_email_idx",
+      "columns",
+      0
+    ],
+    "message": "Expected object, received string"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "received": "string",
+    "path": [
+      "tables",
+      "media",
+      "indexes",
+      "media_created_at_idx",
+      "columns",
+      0
+    ],
+    "message": "Expected object, received string"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "received": "string",
+    "path": [
+      "tables",
+      "media",
+      "indexes",
+      "media_filename_idx",
+      "columns",
+      0
+    ],
+    "message": "Expected object, received string"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "received": "string",
+    "path": [
+      "tables",
+      "payload_preferences",
+      "indexes",
+      "payload_preferences_key_idx",
+      "columns",
+      0
+    ],
+    "message": "Expected object, received string"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "received": "string",
+    "path": [
+      "tables",
+      "payload_preferences",
+      "indexes",
+      "payload_preferences_created_at_idx",
+      "columns",
+      0
+    ],
+    "message": "Expected object, received string"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "received": "string",
+    "path": [
+      "tables",
+      "payload_preferences_rels",
+      "indexes",
+      "payload_preferences_rels_order_idx",
+      "columns",
+      0
+    ],
+    "message": "Expected object, received string"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "received": "string",
+    "path": [
+      "tables",
+      "payload_preferences_rels",
+      "indexes",
+      "payload_preferences_rels_parent_idx",
+      "columns",
+      0
+    ],
+    "message": "Expected object, received string"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "received": "string",
+    "path": [
+      "tables",
+      "payload_preferences_rels",
+      "indexes",
+      "payload_preferences_rels_path_idx",
+      "columns",
+      0
+    ],
+    "message": "Expected object, received string"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "received": "string",
+    "path": [
+      "tables",
+      "payload_migrations",
+      "indexes",
+      "payload_migrations_created_at_idx",
+      "columns",
+      0
+    ],
+    "message": "Expected object, received string"
+  }
+]
+    at migrate (file:///~/Code/payload-reproduce/node_modules/.pnpm/payload@3.0.0-beta.72_@swc+core@1.7.5_@swc+helpers@0.5.11__@swc+types@0.1.12_graphql@16.8.1_typescript@5.5.4/node_modules/payload/dist/bin/migrate.js:75:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 
-To spin up the project locally, follow these steps:
-
-1. First clone the repo
-1. Then `cd YOUR_PROJECT_REPO && cp .env.example .env`
-1. Next `yarn && yarn dev` (or `docker-compose up`, see [Docker](#docker))
-1. Now `open http://localhost:3000/admin` to access the admin panel
-1. Create your first admin user using the form on the page
-
-That's it! Changes made in `./src` will be reflected in your app.
-
-### Docker
-
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this project locally. To do so, follow these steps:
-
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
-
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
-
-## Production
-
-To run Payload in production, you need to build and serve the Admin panel. To do so, follow these steps:
-
-1. First invoke the `payload build` script by running `yarn build` or `npm run build` in your project root. This creates a `./build` directory with a production-ready admin bundle.
-1. Then run `yarn serve` or `npm run serve` to run Node in production and serve Payload from the `./build` directory.
-
-### Deployment
-
-The easiest way to deploy your project is to use [Payload Cloud](https://payloadcms.com/new/import), a one-click hosting solution to deploy production-ready instances of your Payload apps directly from your GitHub repo. You can also deploy your app manually, check out the [deployment documentation](https://payloadcms.com/docs/production/deployment) for full details.
-
-## Questions
-
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+Node.js v20.15.1
+```
